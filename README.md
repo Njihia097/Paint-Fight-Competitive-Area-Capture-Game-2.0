@@ -27,7 +27,7 @@ This game is a JavaScript-based web application using **Three.js** for 3D graphi
 - Node.js and npm (Node Package Manager) installed.
 - A modern web browser (Chrome, Firefox, Safari).
 
-You can find a list of dependencies in the [requirements.txt](./requirements.tx) file.
+You can find a list of dependencies in the [requirements.txt](requirements.txt) file.
 
 ## Setup and Installation
 The following instructions will guide you through downloading, setting up, and playing the game on your local machine. Don’t worry, you don’t need to be a tech expert to enjoy Paint Fight Game!
