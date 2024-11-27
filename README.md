@@ -3,8 +3,6 @@
 
 **Paint Fight Game** is an exciting multiplayer game where two players compete to cover the most area with their paint. Each player aims to dominate the terrain, capture cells, and snatch power-ups to gain an advantage. As the players move, they paint the grid and can even take over each other's territory. Enjoy real-time power-ups that enhance your size or speed while racing against the clock!
 
-![Game Screenshot](C:\Users\njihi\OneDrive - Strathmore University\Documents\Assignments\3.2\graphics\projects\webgl\Paint-Fight-Competitive-Area-Capture-Game-2.0/game-play)  
-*A snapshot of the intense gameplay*
 
 ## Features
 - **Multiplayer Experience**: Two players compete for control of the terrain.
