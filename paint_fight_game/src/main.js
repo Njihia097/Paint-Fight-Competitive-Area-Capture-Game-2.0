@@ -230,5 +230,115 @@ document.addEventListener('keydown', (event) => {
       }
     }
   }
-});
-```
+}
+
+
+);
+
+// Function to get grid index from position
+function getGridIndex(position) {
+  const xIndex = Math.floor((position.x + halfSize) / step);
+  const zIndex = Math.floor((position.z + halfSize) / step);
+  return `${xIndex},${zIndex}`;
+}
+
+// Function to capture a cell
+function captureCell(player, position) {
+  const key = getGridIndex(position);
+
+  if (!gridState[key] || gridState[key] !== player) {
+    if (gridState[key]) {
+      // Decrement opponent's score if taking over a cell
+      if (gridState[key] === 'player1') player1Score--;
+      if (gridState[key] === 'player2') player2Score--;
+
+      // Remove previous marker
+      scene.remove(cellMarkers[key]);
+      delete cellMarkers[key];
+    }
+
+    // Update grid ownership
+    gridState[key] = player;
+
+    // Increment the player's score
+    if (player === 'player1') player1Score++;
+    if (player === 'player2') player2Score++;
+
+    // Create a visual marker to show cell ownership
+    const markerColor = player === 'player1' ? player1Color : player2Color;
+    const markerMaterial = new THREE.MeshStandardMaterial({ color: markerColor });
+    const markerGeometry = new THREE.BoxGeometry(step - 0.5, 0.5, step - 0.5);
+
+    const indices = key.split(',').map(Number);
+    const xPos = -halfSize + indices[0] * step + step / 2;
+    const zPos = -halfSize + indices[1] * step + step / 2;
+
+    const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+    marker.position.set(xPos, 0.25, zPos);
+    marker.receiveShadow = true;
+    scene.add(marker);
+
+    // Track the marker in the cellMarkers object
+    cellMarkers[key] = marker;
+
+    // Update the scoreboard
+    document.getElementById('player1-score').textContent = `Player 1: ${player1Score}`;
+    document.getElementById('player2-score').textContent = `Player 2: ${player2Score}`;
+  }
+}
+
+// Function to check for power-up collection
+function checkPowerUpCollection(player) {
+  powerUps.forEach((powerUp, index) => {
+    if (powerUp.mesh.position.distanceTo(player.position) < 1) {
+      powerUp.collect(player);
+      powerUps.splice(index, 1);
+    }
+  });
+}
+
+// Function to spawn power-ups
+function spawnPowerUp() {
+  const randomType = powerUpTypes[Math.floor(Math.random() * powerUpTypes.length)];
+  const randomX = (Math.floor(Math.random() * divisions) - divisions / 2) * step + step / 2;
+  const randomZ = (Math.floor(Math.random() * divisions) - divisions / 2) * step + step / 2;
+  const position = new THREE.Vector3(randomX, 0, randomZ);
+  const powerUp = new PowerUp(randomType, position);
+  powerUps.push(powerUp);
+
+  // Schedule next power-up spawn
+  const spawnInterval = Math.random() * 5000 + 10000; // 10 to 15 seconds
+  setTimeout(spawnPowerUp, spawnInterval);
+}
+
+// Power-Up Class
+class PowerUp {
+  constructor(type, position) {
+    this.type = type;
+    const color = type === 'size' ? 0xffff00 : 0x00ff00; // Yellow for size, green for speed
+    const geometry = new THREE.SphereGeometry(0.5, 8, 8);
+    const material = new THREE.MeshStandardMaterial({
+      color: color,
+      emissive: color,
+    });
+    this.mesh = new THREE.Mesh(geometry, material);
+    this.mesh.position.set(position.x, 0.5, position.z);
+    scene.add(this.mesh);
+  }
+
+  collect(player) {
+    scene.remove(this.mesh);
+
+    if (this.type === 'size') {
+      player.scale.set(2, 2, 2);
+      setTimeout(() => {
+        player.scale.set(1, 1, 1);
+      }, 5000); // Effect lasts 5 seconds
+    } else if (this.type === 'speed') {
+      moveCooldowns[player.name] = 100; // Faster movement
+      setTimeout(() => {
+        moveCooldowns[player.name] = 200; // Reset to normal speed
+      }, 5000); // Effect lasts 5 seconds
+    }
+  }
+}
