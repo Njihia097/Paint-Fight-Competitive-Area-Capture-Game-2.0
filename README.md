@@ -1,87 +1,89 @@
-# Paint-Fight-Competitive-Area-Capture-Game-2.0
 # Paint Fight Game
 
-**Paint Fight Game** is an exciting multiplayer game where two players compete to cover the most area with their paint. Each player aims to dominate the terrain, capture cells, and snatch power-ups to gain an advantage. As the players move, they paint the grid and can even take over each other's territory. Enjoy real-time power-ups that enhance your size or speed while racing against the clock!
+Welcome to **Paint Fight Game** – a fun, engaging two-player game where you compete to cover the most area with your paint! Each player uses different colored paint, and your mission is to conquer as much territory as possible before the timer runs out. Let the battle of colors begin!
 
+## Table of Contents
+- [About the Game](#about-the-game)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Setup and Installation](#setup-and-installation)
+- [How to Play](#how-to-play)
+- [Images](#images)
+
+## About the Game
+In Paint Fight Game, two players use different colors to mark cells on a virtual playing field. The game is all about strategy and quick moves – take control of cells by covering them with your paint. Collect power-ups along the way to gain temporary advantages over your opponent, such as increased speed or size.
 
 ## Features
-- **Multiplayer Experience**: Two players compete for control of the terrain.
-- **Power-Ups**: Size and speed power-ups make the gameplay more strategic and exciting.
-- **Real-Time Action**: Players can cover each other's paint for a dynamic, competitive experience.
-- **Customizable Settings**: Choose player colors and game duration (30 to 120 seconds).
+- Two-player paint competition game.
+- Unique power-ups to make gameplay more challenging and dynamic.
+- Power-ups include speed boost and size increase.
+- Real-time score tracking.
+- Stunning visuals with Three.js and intuitive UI for great user experience.
+- Background music to enhance the gaming experience.
 
 ## Requirements
-To run this game, ensure you have the following installed:
+This game is a JavaScript-based web application using **Three.js** for 3D graphics, **TWEEN.js** for animations, and background music to set the mood. Ensure you have the following:
 
-- **Node.js**: Required for serving the game files and dependencies.
-- **Three.js**: Used for 3D rendering.
-- **TWEEN.js**: Used for animations and transitions.
+- Node.js and npm (Node Package Manager) installed.
+- A modern web browser (Chrome, Firefox, Safari).
 
-For all dependencies, please refer to the `paint_fight_game/requirements.txt` file included in this repository:
+You can find a list of dependencies in the [requirements.txt](./requirements.tx) file.
 
-```
-three==0.132.2
-tweenjs==18.6.4
-```
-
-## Setup & Installation
-To set up the game on your local machine, follow these steps:
-
-1. **Clone the Repository**
-   ```sh
-   git clone <repository-link>
-   cd paint-fight-game
-   ```
-
-2. **Install Dependencies**
-   Ensure you have Node.js installed, then run the following command:
-   ```sh
-   npm install
-   ```
-
-3. **Install Python Requirements**
-   Create a virtual environment (recommended) and install Python requirements:
-   ```sh
-   python -m venv venv
-   venv\Scripts\activate (Windows) or source venv/bin/activate (Linux/macOS)
-   pip install -r requirements.txt
-   ```
-
-4. **Start the Game**
-   Run the following command to start the game locally:
-   ```sh
-   npm start
-   ```
-
-5. **Open in Browser**
-   After starting the game, open your browser and go to:
-   ```
-   http://localhost:3000
-   ```
-
-## How to Play
-1. **Launch the Game**: After starting the server, open the link in your browser.
-2. **Select Settings**: Choose the colors for Player 1 and Player 2 and select the game duration (30, 45, 60, 90, or 120 seconds).
-3. **Game Controls**:
-   - **Player 1**: Move using the **W, A, S, D** keys.
-   - **Player 2**: Move using the **Arrow Keys**.
-4. **Capture Cells**: Move around to paint cells with your color. Each cell you paint adds to your score.
-5. **Power-Ups**: Grab power-ups to either increase your speed or size, giving you a temporary advantage.
-
-## Intuitive Game Download & Play
-If you'd prefer a simple, ready-to-play version of the game, follow these steps:
+## Setup and Installation
+The following instructions will guide you through downloading, setting up, and playing the game on your local machine. Don’t worry, you don’t need to be a tech expert to enjoy Paint Fight Game!
 
 1. **Download the Game**
-   - Go to the [releases page](https://github.com/Njihia097/Paint-Fight-Competitive-Area-Capture-Game-2.0) of this repository.
-   - Download the latest version as a ZIP file.
-   - Extract the ZIP file to your desired location.
+   - Click on the **Download** button/link provided.
+   - Unzip the downloaded file to a folder on your computer.
 
-2. **Run the Game**
-   - Double-click on the `index.html` file to start the game in your default browser.
+2. **Install Node.js and npm**
+   - If you don't have Node.js, download it from [https://nodejs.org/](https://nodejs.org/).
+   - Install Node.js, which automatically includes npm (Node Package Manager).
 
-3. **Enjoy the Game!**
-   - Start painting the terrain and compete against your friends!
+3. **Install Dependencies**
+   - Open a terminal (Command Prompt on Windows) and navigate to the folder where you unzipped the game files.
+   - Run the following command to install all required dependencies:
+     ```sh
+     npm install
+     ```
 
----
+4. **Run the Game**
+   - After the installation is complete, start the game server by running:
+     ```sh
+     npm start
+     ```
+   - Open a web browser and go to [http://localhost:3000](http://localhost:3000) to start playing!
+
+## How to Play
+1. **Select Colors and Game Duration**
+   - On the start screen, choose your preferred colors for **Player 1** and **Player 2**.
+   - Select the game duration from the available options (30, 45, 60, 90, 120 seconds).
+
+2. **Start the Game**
+   - Click on the **Start Game** button.
+
+3. **Controls**
+   - Player 1 uses **W, A, S, D** keys to move.
+   - Player 2 uses **Arrow keys** to move.
+
+4. **Objective**
+   - The goal is to cover as much ground as possible with your color before the timer runs out.
+   - Collect power-ups to gain an advantage over your opponent.
+
+5. **Winning the Game**
+   - The player with the highest score at the end of the time wins.
+
+## Images
+To get a feel of the game, here are some screenshots:
+
+### Start Screen - Ready to Choose Your Colors and Battle!
+![Start Screen Image](preview_images/start_screen.png)
+
+### Gameplay in Action - Battle for Territory!
+![On Play Image](preview_images/game-play.png)
+
+### Game Over - The Winner Takes It All!
+![Game Over Screen Image](preview_images/game_over_screen.png)
+
 
 
