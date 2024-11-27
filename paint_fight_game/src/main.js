@@ -99,3 +99,136 @@ spotLight.castShadow = true;
 spotLight.shadow.mapSize.width = 2048;
 spotLight.shadow.mapSize.height = 2048;
 scene.add(spotLight);
+
+// Create grid state tracking
+const gridState = {}; // To track ownership of cells
+const cellMarkers = {}; // Track cell markers to remove when taken over
+
+// Player initialization
+let player1, player2;
+let player1Ring, player2Ring;
+
+player1 = new THREE.Mesh(
+  new THREE.SphereGeometry(1, 16, 16),
+  new THREE.MeshStandardMaterial({ color: player1Color })
+);
+player1.name = 'player1';
+
+player1Ring = new THREE.Mesh(
+  new THREE.TorusGeometry(1.2, 0.1, 16, 100),
+  new THREE.MeshStandardMaterial({
+    color: player1Color,
+    emissive: player1Color,
+  })
+);
+player1Ring.rotation.x = Math.PI / 2;
+player1Ring.position.set(0, 0.5, 0);
+player1.add(player1Ring);
+
+player2 = new THREE.Mesh(
+  new THREE.SphereGeometry(1, 16, 16),
+  new THREE.MeshStandardMaterial({ color: player2Color })
+);
+player2.name = 'player2';
+
+player2Ring = new THREE.Mesh(
+  new THREE.TorusGeometry(1.2, 0.1, 16, 100),
+  new THREE.MeshStandardMaterial({
+    color: player2Color,
+    emissive: player2Color,
+  })
+);
+player2Ring.rotation.x = Math.PI / 2;
+player2Ring.position.set(0, 0.5, 0);
+player2.add(player2Ring);
+
+// Initial positions for players
+player1.position.set(-halfSize + step / 2, 1, -halfSize + step / 2);
+player2.position.set(halfSize - step / 2, 1, halfSize - step / 2);
+
+player1.castShadow = true;
+player2.castShadow = true;
+
+scene.add(player1, player2);
+
+// Handle player movement
+document.addEventListener('keydown', (event) => {
+  const currentTime = Date.now();
+
+  // Player 1 controls (WASD)
+  if (['w', 'a', 's', 'd'].includes(event.key)) {
+    if (currentTime - lastMoveTime.player1 > moveCooldowns.player1) {
+      let moved = false;
+      switch (event.key) {
+        case 'w': // Move forward
+          if (player1.position.z - step >= -halfSize) {
+            player1.position.z -= step;
+            moved = true;
+          }
+          break;
+        case 's': // Move backward
+          if (player1.position.z + step <= halfSize) {
+            player1.position.z += step;
+            moved = true;
+          }
+          break;
+        case 'a': // Move left
+          if (player1.position.x - step >= -halfSize) {
+            player1.position.x -= step;
+            moved = true;
+          }
+          break;
+        case 'd': // Move right
+          if (player1.position.x + step <= halfSize) {
+            player1.position.x += step;
+            moved = true;
+          }
+          break;
+      }
+      if (moved) {
+        captureCell('player1', player1.position);
+        lastMoveTime.player1 = currentTime;
+        checkPowerUpCollection(player1);
+      }
+    }
+  }
+
+  // Player 2 controls (Arrow keys)
+  else if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+    if (currentTime - lastMoveTime.player2 > moveCooldowns.player2) {
+      let moved = false;
+      switch (event.key) {
+        case 'ArrowUp': // Move forward
+          if (player2.position.z - step >= -halfSize) {
+            player2.position.z -= step;
+            moved = true;
+          }
+          break;
+        case 'ArrowDown': // Move backward
+          if (player2.position.z + step <= halfSize) {
+            player2.position.z += step;
+            moved = true;
+          }
+          break;
+        case 'ArrowLeft': // Move left
+          if (player2.position.x - step >= -halfSize) {
+            player2.position.x -= step;
+            moved = true;
+          }
+          break;
+        case 'ArrowRight': // Move right
+          if (player2.position.x + step <= halfSize) {
+            player2.position.x += step;
+            moved = true;
+          }
+          break;
+      }
+      if (moved) {
+        captureCell('player2', player2.position);
+        lastMoveTime.player2 = currentTime;
+        checkPowerUpCollection(player2);
+      }
+    }
+  }
+});
+```
