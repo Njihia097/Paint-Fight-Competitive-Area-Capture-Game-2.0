@@ -342,3 +342,92 @@ class PowerUp {
     }
   }
 }
+
+// Function to Start the Game
+document.getElementById('start-game-button').addEventListener('click', () => {
+  // Get selected colors
+  const player1ColorInput = document.getElementById('player1-color').value;
+  const player2ColorInput = document.getElementById('player2-color').value;
+
+  player1Color = parseInt(player1ColorInput.replace('#', '0x'));
+  player2Color = parseInt(player2ColorInput.replace('#', '0x'));
+
+  // Get game duration
+  gameDuration = parseInt(document.getElementById('game-duration').value);
+
+  // Hide the start screen
+  document.getElementById('start-screen').style.display = 'none';
+
+  // Initialize the game
+  initGame();
+});
+
+// Function to initialize the game
+function initGame() {
+  // Set scoreboard colors
+  document.getElementById('player1-score').style.color = `#${player1Color.toString(16).padStart(6, '0')}`;
+  document.getElementById('player2-score').style.color = `#${player2Color.toString(16).padStart(6, '0')}`;
+
+  // Start the timer
+  startTimer();
+
+  // Start spawning power-ups
+  spawnPowerUp();
+}
+
+// Function to start the timer
+function startTimer() {
+  remainingTime = gameDuration;
+  document.getElementById('timer').textContent = `Time Left: ${remainingTime}s`;
+
+  timerInterval = setInterval(() => {
+    remainingTime--;
+    document.getElementById('timer').textContent = `Time Left: ${remainingTime}s`;
+ if (remainingTime <= 0) {
+      clearInterval(timerInterval);
+      endGame();
+    }
+  }, 1000);
+}
+
+// Function to end the game
+function endGame() {
+  // Display the game over screen
+  document.getElementById('game-over-screen').style.display = 'flex';
+
+  // Show final scores
+  const finalScoresDiv = document.getElementById('final-scores');
+  finalScoresDiv.innerHTML = `
+    <p style="color: #${player1Color.toString(16).padStart(6, '0')}">Player 1 Score: ${player1Score}</p>
+    <p style="color: #${player2Color.toString(16).padStart(6, '0')}">Player 2 Score: ${player2Score}</p>
+  `;
+ // Announce the winner
+  if (player1Score > player2Score) {
+    finalScoresDiv.innerHTML += `<p style="color: #${player1Color.toString(16).padStart(6, '0')}">Winner: Player 1!</p>`;
+  } else if (player2Score > player1Score) {
+    finalScoresDiv.innerHTML += `<p style="color: #${player2Color.toString(16).padStart(6, '0')}">Winner: Player 2!</p>`;
+  } else {
+    finalScoresDiv.innerHTML += '<p>It\'s a Tie!</p>';
+  }
+}
+
+// Restart Game Functionality
+document.getElementById('restart-game-button').addEventListener('click', () => {
+  // Reload the page to restart the game
+  location.reload();
+});
+
+// Handle window resize
+window.addEventListener('resize', onWindowResize, false);
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+// Basic render loop
+function animate() {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+}
+animate();
