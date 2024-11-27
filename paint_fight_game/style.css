@@ -1,69 +1,68 @@
 body, html {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-  
-  #game-container {
-    width: 100%;
-    height: 100%;
-  }
-  
-  #start-screen,
-  #game-over-screen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-  }
-  
-  #start-screen h2,
-  #game-over-screen h2 {
-    margin-bottom: 20px;
-  }
-  
-  #start-screen div,
-  #game-over-screen div {
-    margin-bottom: 10px;
-  }
-  
-  #start-screen label {
-    margin-right: 10px;
-  }
-  
-  #start-screen input {
-    margin-bottom: 10px;
-  }
-  
-  #scoreboard,
-  #timer {
-    position: absolute;
-    top: 20px;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    font-size: 18px;
-  }
-  
-  #scoreboard {
-    left: 20px;
-  }
-  
-  #timer {
-    right: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .score {
-    margin: 5px 0;
-  }
-  
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#game-container {
+  width: 100%;
+  height: 100%;
+}
+
+#start-screen,
+#game-over-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+#start-screen h2,
+#game-over-screen h2 {
+  margin-bottom: 20px;
+}
+
+#start-screen div,
+#game-over-screen div {
+  margin-bottom: 10px;
+}
+
+#start-screen label {
+  margin-right: 10px;
+}
+
+#start-screen input {
+  margin-bottom: 10px;
+}
+
+#scoreboard,
+#timer {
+  position: absolute;
+  top: 20px;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+}
+
+#scoreboard {
+  left: 20px;
+}
+
+#timer {
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.score {
+  margin: 5px 0;
+}
